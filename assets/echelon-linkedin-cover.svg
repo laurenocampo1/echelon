@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" fill="none">
+  <defs>
+
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0D0D12"/>
+      <stop offset="100%" stop-color="#1A1830"/>
+    </linearGradient>
+
+    <!-- Rainbow spans full frame width, applied to figurines -->
+    <linearGradient id="figRainbow" x1="100" y1="0" x2="1520" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"    stop-color="#FF6B6B" stop-opacity="0.85"/>
+      <stop offset="16%"   stop-color="#FF9F43" stop-opacity="0.85"/>
+      <stop offset="32%"   stop-color="#F9CA24" stop-opacity="0.85"/>
+      <stop offset="50%"   stop-color="#6AB04C" stop-opacity="0.85"/>
+      <stop offset="66%"   stop-color="#4ECDC4" stop-opacity="0.85"/>
+      <stop offset="82%"   stop-color="#45B7D1" stop-opacity="0.85"/>
+      <stop offset="100%"  stop-color="#A29BFE" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowLg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+  </defs>
+
+  <rect width="1584" height="396" fill="url(#bg)"/>
+
+  <!-- Connection lines — full frame spread -->
+  <line x1="140"  y1="150" x2="330"  y2="260" stroke="white" stroke-width="0.7" opacity="0.09"/>
+  <line x1="140"  y1="150" x2="510"  y2="130" stroke="white" stroke-width="0.7" opacity="0.09"/>
+  <line x1="330"  y1="260" x2="690"  y2="270" stroke="white" stroke-width="0.7" opacity="0.08"/>
+  <line x1="510"  y1="130" x2="870"  y2="190" stroke="white" stroke-width="0.7" opacity="0.09"/>
+  <line x1="690"  y1="270" x2="870"  y2="190" stroke="white" stroke-width="0.7" opacity="0.08"/>
+  <line x1="870"  y1="190" x2="1050" y2="270" stroke="white" stroke-width="0.7" opacity="0.09"/>
+  <line x1="870"  y1="190" x2="1230" y2="130" stroke="white" stroke-width="0.7" opacity="0.09"/>
+  <line x1="1050" y1="270" x2="1390" y2="260" stroke="white" stroke-width="0.7" opacity="0.08"/>
+  <line x1="1230" y1="130" x2="1490" y2="130" stroke="white" stroke-width="0.7" opacity="0.08"/>
+  <line x1="1390" y1="260" x2="1490" y2="130" stroke="white" stroke-width="0.6" opacity="0.07"/>
+  <!-- Cross connections -->
+  <line x1="510"  y1="130" x2="690"  y2="270" stroke="white" stroke-width="0.5" opacity="0.05"/>
+  <line x1="1050" y1="270" x2="1230" y2="130" stroke="white" stroke-width="0.5" opacity="0.05"/>
+
+  <!-- ── MEMORY LAYER (140, 150) — label above ── -->
+  <ellipse cx="140" cy="150" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(140,150)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="140" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Memory Layer</text>
+  <text x="140" y="109" text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[Mem0]</text>
+
+  <!-- ── INTEGRATIONS (330, 260) — label below ── -->
+  <ellipse cx="330" cy="260" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(330,260)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="330" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Integrations</text>
+  <text x="330" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[MCP]</text>
+
+  <!-- ── OPS AGENT (510, 130) — label above ── -->
+  <ellipse cx="510" cy="130" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(510,130)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="510" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Ops Agent</text>
+  <text x="510" y="89"  text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[Claude]</text>
+
+  <!-- ── ANALYTICS (690, 270) — label below ── -->
+  <ellipse cx="690" cy="270" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(690,270)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="690" y="294" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Analytics Agent</text>
+  <text x="690" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[GPT-5]</text>
+
+  <!-- ── ORCHESTRATOR (870, 190) — center, biggest, label above ── -->
+  <ellipse cx="870" cy="190" rx="46" ry="46" fill="url(#glowLg)"/>
+  <g transform="translate(870,190)">
+    <circle  cx="0" cy="-20" r="8.5"  fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-4"  rx="12"  ry="14" fill="url(#figRainbow)"/>
+  </g>
+  <text x="870" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="11.5" font-weight="700" fill="white" opacity="0.88">Orchestrator</text>
+  <text x="870" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5"  fill="white" opacity="0.50">[LLM Core]</text>
+
+  <!-- ── COMMS AGENT (1050, 270) — label below ── -->
+  <ellipse cx="1050" cy="270" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(1050,270)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="1050" y="294" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Comms Agent</text>
+  <text x="1050" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[Claude]</text>
+
+  <!-- ── CONTENT AGENT (1230, 130) — label above ── -->
+  <ellipse cx="1230" cy="130" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(1230,130)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="1230" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Content Agent</text>
+  <text x="1230" y="89"  text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[Claude]</text>
+
+  <!-- ── SCHEDULER (1390, 260) — label below ── -->
+  <ellipse cx="1390" cy="260" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(1390,260)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="1390" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Scheduler</text>
+  <text x="1390" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[Automation]</text>
+
+  <!-- ── MONITOR (1490, 130) — label above ── -->
+  <ellipse cx="1490" cy="130" rx="30" ry="30" fill="url(#glow)"/>
+  <g transform="translate(1490,130)">
+    <circle  cx="0" cy="-15" r="6"    fill="url(#figRainbow)"/>
+    <ellipse cx="0" cy="-2"  rx="9"   ry="10.5" fill="url(#figRainbow)"/>
+  </g>
+  <text x="1490" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="white" opacity="0.82">Monitor</text>
+  <text x="1490" y="89"  text-anchor="middle" font-family="Arial, sans-serif" font-size="9"    fill="white" opacity="0.45">[System]</text>
+
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" fill="none">
+  <!-- Staircase bars — gold, bottom-aligned -->
+  <rect x="0"  y="32" width="7" height="14" rx="2" fill="#D4AF37" opacity="0.35"/>
+  <rect x="11" y="23" width="7" height="23" rx="2" fill="#D4AF37" opacity="0.55"/>
+  <rect x="22" y="14" width="7" height="32" rx="2" fill="#D4AF37" opacity="0.78"/>
+  <rect x="33" y="5"  width="7" height="41" rx="2" fill="#D4AF37"/>
+
+  <!-- Separator -->
+  <line x1="56" y1="8" x2="56" y2="48" stroke="rgba(15,15,15,0.14)" stroke-width="1"/>
+
+  <!-- Wordmark — dark, for light backgrounds -->
+  <text x="70" y="33"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="18"
+    font-weight="800"
+    letter-spacing="6"
+    fill="#0F0F0F">ECHELON</text>
+
+  <!-- Tagline -->
+  <text x="71" y="46"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="9"
+    font-weight="400"
+    letter-spacing="2.8"
+    fill="rgba(15,15,15,0.42)">ONE LAYER ABOVE</text>
+</svg>
