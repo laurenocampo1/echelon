@@ -10,15 +10,15 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:      #12121C;
-    --bg2:     #1A1A28;
-    --bg3:     #222038;
-    --violet:  #6C63FF;
-    --violet2: #C4B5FD;
+    --bg:      #0A0E1A;
+    --bg2:     #111827;
+    --bg3:     #1A2540;
+    --violet:  #00D4FF;
+    --violet2: #E8F0FE;
     --white:   #FFFFFF;
-    --gray1:   #EEEEF8;
-    --gray2:   #ABABC8;
-    --gray3:   #4A4A6A;
+    --gray1:   #E8F0FE;
+    --gray2:   #A0AABB;
+    --gray3:   #3A4A60;
     --radius:  10px;
   }
 
@@ -75,10 +75,10 @@
     font-size: 11px; font-weight: 600; letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--violet2);
-    border: 1px solid rgba(108,99,255,.35);
+    border: 1px solid rgba(0,212,255,.35);
     padding: 5px 14px; border-radius: 20px;
     margin-bottom: 28px;
-    background: rgba(108,99,255,.08);
+    background: rgba(0,212,255,.08);
   }
   h1 {
     font-size: clamp(38px, 6vw, 72px);
@@ -89,7 +89,7 @@
     color: var(--white);
   }
   h1 span {
-    background: linear-gradient(135deg, #6C63FF 0%, #C4B5FD 100%);
+    background: linear-gradient(135deg, #00D4FF 0%, #E8F0FE 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
   .hero-sub {
@@ -99,7 +99,7 @@
   .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .btn-primary {
     display: inline-block;
-    background: var(--violet); color: #fff;
+    background: linear-gradient(135deg, #00D4FF, #2563EB); color: #fff;
     padding: 14px 32px; border-radius: 8px;
     font-size: 15px; font-weight: 600; text-decoration: none;
     transition: opacity .2s, transform .2s;
@@ -140,10 +140,10 @@
     text-align: center;
     transition: border-color .3s, transform .3s;
   }
-  .stat-card:hover { border-color: rgba(108,99,255,.35); transform: translateY(-3px); }
+  .stat-card:hover { border-color: rgba(0,212,255,.35); transform: translateY(-3px); }
   .stat-num {
     font-size: 44px; font-weight: 800; color: var(--white);
-    background: linear-gradient(135deg,#6C63FF,#C4B5FD);
+    background: linear-gradient(135deg,#00D4FF,#E8F0FE);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     display: block; margin-bottom: 6px;
   }
@@ -177,7 +177,7 @@
   .prob-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #6C63FF, #C4B5FD);
+    background: linear-gradient(90deg, #00D4FF, #E8F0FE);
     opacity: 0; transition: opacity .3s;
   }
   .prob-card:hover::before { opacity: 1; }
@@ -195,7 +195,7 @@
     border-radius: var(--radius);
     padding: 36px 32px;
   }
-  .compare-col.after { border-color: rgba(108,99,255,.3); background: rgba(108,99,255,.06); }
+  .compare-col.after { border-color: rgba(0,212,255,.3); background: rgba(0,212,255,.06); }
   .compare-label {
     font-size: 11px; font-weight: 700; letter-spacing: 3px;
     text-transform: uppercase; margin-bottom: 20px;
@@ -222,7 +222,7 @@
   }
   .bar-fill {
     height: 100%; border-radius: 99px;
-    background: linear-gradient(90deg,#6C63FF,#C4B5FD);
+    background: linear-gradient(90deg,#00D4FF,#E8F0FE);
     width: 0; transition: width 1.2s cubic-bezier(.22,1,.36,1);
   }
 
@@ -239,7 +239,7 @@
     position: relative;
     transition: border-color .3s, transform .3s;
   }
-  .step:hover { border-color: rgba(108,99,255,.3); transform: translateY(-4px); }
+  .step:hover { border-color: rgba(0,212,255,.3); transform: translateY(-4px); }
   .step-num {
     font-size: 11px; font-weight: 700; letter-spacing: 2px;
     color: var(--violet2); margin-bottom: 16px; display: block;
@@ -266,8 +266,8 @@
   }
   .tier-card:hover { transform: translateY(-4px); }
   .tier-card.featured {
-    border-color: rgba(108,99,255,.45);
-    background: rgba(108,99,255,.07);
+    border-color: rgba(0,212,255,.45);
+    background: rgba(0,212,255,.07);
     position: relative; overflow: hidden;
   }
   .tier-card.featured::before {
@@ -296,7 +296,7 @@
     transition: background .2s, border-color .2s, color .2s;
     margin-top: auto;
   }
-  .tier-btn:hover { background: rgba(108,99,255,.15); border-color: var(--violet); color: var(--white); }
+  .tier-btn:hover { background: rgba(0,212,255,.15); border-color: var(--violet); color: var(--white); }
   .tier-card.featured .tier-btn {
     background: var(--violet); border-color: var(--violet); color: #fff;
   }
@@ -350,7 +350,7 @@
     padding: 36px 28px;
     transition: border-color .3s, transform .3s;
   }
-  .icp-card:hover { border-color: rgba(108,99,255,.25); transform: translateY(-3px); }
+  .icp-card:hover { border-color: rgba(0,212,255,.25); transform: translateY(-3px); }
   .icp-icon { font-size: 32px; margin-bottom: 16px; display: block; }
   .icp-tier-badge {
     font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
@@ -373,7 +373,7 @@
   /* ── CTA ── */
   #cta {
     text-align: center; padding: 120px 24px;
-    background: radial-gradient(ellipse 900px 400px at 50% 50%, rgba(108,99,255,.12) 0%, transparent 70%);
+    background: radial-gradient(ellipse 900px 400px at 50% 50%, rgba(0,212,255,.12) 0%, transparent 70%);
   }
   #cta h2 { margin-bottom: 16px; }
   #cta p { font-size: 17px; color: var(--gray2); max-width: 460px; margin: 0 auto 40px; line-height: 1.7; }
@@ -431,7 +431,7 @@
     transform: scaleY(0); transform-origin: center;
     transition: transform .25s ease;
   }
-  .build-tab.active { border-color: rgba(108,99,255,.4); background: rgba(108,99,255,.08); }
+  .build-tab.active { border-color: rgba(0,212,255,.4); background: rgba(0,212,255,.08); }
   .build-tab.active::before { transform: scaleY(1); }
   .build-tab:hover:not(.active) { border-color: rgba(255,255,255,.15); transform: translateX(2px); }
   .bt-icon {
@@ -452,7 +452,7 @@
 
   .build-panel {
     display: none;
-    background: var(--bg2); border: 1px solid rgba(108,99,255,.2);
+    background: var(--bg2); border: 1px solid rgba(0,212,255,.2);
     border-radius: 14px; padding: 36px 40px;
   }
   .build-panel.active {
@@ -505,12 +505,12 @@
   }
   .bp-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
   .bp-metric {
-    background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.18);
+    background:rgba(0,212,255,.08); border:1px solid rgba(0,212,255,.18);
     border-radius:8px; padding:12px 8px; text-align:center;
   }
   .bp-metric-num {
     font-size:20px; font-weight:800;
-    background:linear-gradient(135deg,#6C63FF,#C4B5FD);
+    background:linear-gradient(135deg,#00D4FF,#E8F0FE);
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     line-height:1.1;
   }
@@ -525,10 +525,10 @@
   /* ── ARCH DIAGRAM ── */
   .pill {
     font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.3);
+    background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3);
     color: var(--violet2); padding: 4px 10px; border-radius: 20px;
   }
-  .pill-bright { background: rgba(108,99,255,0.3); border-color: rgba(108,99,255,0.6); }
+  .pill-bright { background: rgba(0,212,255,0.3); border-color: rgba(0,212,255,0.6); }
   .pulse-dot {
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--violet);
@@ -991,12 +991,12 @@
       <div class="compare-col after reveal reveal-delay-1">
         <div class="compare-label">Agentic Infrastructure</div>
         <ul class="compare-list">
-          <li><span class="ico" style="color:#C4B5FD">✓</span> Agents monitor, decide, and act — 24/7</li>
-          <li><span class="ico" style="color:#C4B5FD">✓</span> Context stored in persistent memory layer</li>
-          <li><span class="ico" style="color:#C4B5FD">✓</span> New agents onboarded by config, not training</li>
-          <li><span class="ico" style="color:#C4B5FD">✓</span> Unified MCP integration layer across your stack</li>
-          <li><span class="ico" style="color:#C4B5FD">✓</span> Ops scales with compute — not headcount</li>
-          <li><span class="ico" style="color:#C4B5FD">✓</span> Real-time dashboards, zero manual assembly</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> Agents monitor, decide, and act — 24/7</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> Context stored in persistent memory layer</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> New agents onboarded by config, not training</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> Unified MCP integration layer across your stack</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> Ops scales with compute — not headcount</li>
+          <li><span class="ico" style="color:#E8F0FE">✓</span> Real-time dashboards, zero manual assembly</li>
         </ul>
       </div>
     </div>
@@ -1220,7 +1220,7 @@
 
         <!-- Layer 4: Integrations -->
         <div class="arch-layer" data-layer="0" style="
-          background: rgba(108,99,255,0.06); border:1px solid rgba(108,99,255,0.15);
+          background: rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15);
           border-radius:12px 12px 0 0; padding:24px 32px;
           display:flex; align-items:center; gap:20px;
           opacity:0; transform:translateY(20px); transition: opacity .5s, transform .5s;
@@ -1238,14 +1238,14 @@
 
         <!-- Connector -->
         <div class="arch-connector" style="display:flex;justify-content:center;position:relative;z-index:1;">
-          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(108,99,255,0.4),rgba(108,99,255,0.8));position:relative;">
+          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(0,212,255,0.4),rgba(0,212,255,0.8));position:relative;">
             <div class="pulse-dot" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);"></div>
           </div>
         </div>
 
         <!-- Layer 3: Memory -->
         <div class="arch-layer" data-layer="1" style="
-          background: rgba(108,99,255,0.09); border:1px solid rgba(108,99,255,0.2);
+          background: rgba(0,212,255,0.09); border:1px solid rgba(0,212,255,0.2);
           padding:24px 32px;
           display:flex; align-items:center; gap:20px;
           opacity:0; transform:translateY(20px); transition: opacity .5s .15s, transform .5s .15s;
@@ -1263,14 +1263,14 @@
 
         <!-- Connector -->
         <div class="arch-connector" style="display:flex;justify-content:center;position:relative;z-index:1;">
-          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(108,99,255,0.6),rgba(108,99,255,1));position:relative;">
+          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(0,212,255,0.6),rgba(0,212,255,1));position:relative;">
             <div class="pulse-dot" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);animation-delay:.3s;"></div>
           </div>
         </div>
 
         <!-- Layer 2: Specialist Agents -->
         <div class="arch-layer" data-layer="2" style="
-          background: rgba(108,99,255,0.12); border:1px solid rgba(108,99,255,0.28);
+          background: rgba(0,212,255,0.12); border:1px solid rgba(0,212,255,0.28);
           padding:24px 32px;
           display:flex; align-items:center; gap:20px;
           opacity:0; transform:translateY(20px); transition: opacity .5s .3s, transform .5s .3s;
@@ -1288,18 +1288,18 @@
 
         <!-- Connector -->
         <div class="arch-connector" style="display:flex;justify-content:center;position:relative;z-index:1;">
-          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(196,181,253,0.6),rgba(196,181,253,1));position:relative;">
+          <div style="width:2px;height:32px;background:linear-gradient(180deg,rgba(232,240,254,0.6),rgba(232,240,254,1));position:relative;">
             <div class="pulse-dot" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);animation-delay:.6s;background:var(--violet2);"></div>
           </div>
         </div>
 
         <!-- Layer 1: Orchestrator -->
         <div class="arch-layer" data-layer="3" style="
-          background: rgba(108,99,255,0.18); border:1px solid rgba(108,99,255,0.5);
+          background: rgba(0,212,255,0.18); border:1px solid rgba(0,212,255,0.5);
           border-radius:0 0 12px 12px; padding:28px 32px;
           display:flex; align-items:center; gap:20px;
           opacity:0; transform:translateY(20px); transition: opacity .5s .45s, transform .5s .45s;
-          box-shadow: 0 0 40px rgba(108,99,255,0.15);
+          box-shadow: 0 0 40px rgba(0,212,255,0.15);
         ">
           <div style="font-size:28px; flex-shrink:0;">🎯</div>
           <div style="flex:1;">
@@ -1576,7 +1576,7 @@ if (archDiagram) archObserver.observe(archDiagram);
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = `rgba(108,99,255,${(1 - d/MAX_DIST) * 0.25})`;
+          ctx.strokeStyle = `rgba(0,212,255,${(1 - d/MAX_DIST) * 0.25})`;
           ctx.lineWidth = .7;
           ctx.stroke();
         }
@@ -1591,7 +1591,7 @@ if (archDiagram) archObserver.observe(archDiagram);
         ctx.beginPath();
         ctx.moveTo(n.x, n.y);
         ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = `rgba(196,181,253,${(1 - d/MOUSE_DIST) * 0.4})`;
+        ctx.strokeStyle = `rgba(232,240,254,${(1 - d/MOUSE_DIST) * 0.4})`;
         ctx.lineWidth = .8;
         ctx.stroke();
       }
@@ -1601,7 +1601,7 @@ if (archDiagram) archObserver.observe(archDiagram);
     for (const n of nodes) {
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(108,99,255,0.6)';
+      ctx.fillStyle = 'rgba(0,212,255,0.6)';
       ctx.fill();
     }
 
