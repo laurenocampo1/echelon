@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloomberry Resorts — Echelon Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: A4 landscape; margin: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F7F6F3;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .card {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 30px;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 4px 48px rgba(0,0,0,0.07);
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    overflow: hidden;
+    position: relative;
+    margin: 24px;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #D4AF37;
+    z-index: 1;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .divider {
+    background: rgba(0,0,0,0.07);
+    align-self: stretch;
+    margin: 32px 0;
+  }
+
+  /* COL 1 */
+  .col-header {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #F7F6F3;
+    border-radius: 30px 0 0 30px;
+  }
+
+  .wordmark {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(15,15,15,0.3);
+    text-transform: uppercase;
+  }
+
+  .client-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 10px;
+  }
+
+  .client-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0F0F0F;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .build-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(15,15,15,0.45);
+    margin-bottom: 28px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+    color: #B8960E;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22C55E;
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    font-size: 11px;
+    color: rgba(15,15,15,0.4);
+    font-weight: 500;
+  }
+
+  /* COL 2 */
+  .col-built {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(15,15,15,0.3);
+    margin-bottom: 14px;
+  }
+
+  .problem-text {
+    font-size: 13px;
+    color: rgba(15,15,15,0.6);
+    line-height: 1.7;
+  }
+
+  .problem-text strong {
+    color: #0F0F0F;
+    font-weight: 600;
+  }
+
+  .stack-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .stack-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: #F7F6F3;
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .stack-icon svg { width: 13px; height: 13px; }
+
+  .stack-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0F0F0F;
+    line-height: 1.2;
+  }
+
+  .stack-desc {
+    font-size: 10.5px;
+    color: rgba(15,15,15,0.4);
+    margin-top: 2px;
+  }
+
+  /* COL 3 */
+  .col-results {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 30px 30px 0;
+  }
+
+  .capabilities {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 14px;
+  }
+
+  .cap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cap-bullet {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #D4AF37;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .cap-text {
+    font-size: 12.5px;
+    color: rgba(15,15,15,0.6);
+    line-height: 1.5;
+  }
+
+  .cap-text strong {
+    color: #0F0F0F;
+    font-weight: 600;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-box {
+    background: #F7F6F3;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 22px;
+    font-weight: 900;
+    color: #D4AF37;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: rgba(15,15,15,0.4);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* Footer */
+  .footer {
+    font-size: 11px;
+    color: rgba(15,15,15,0.3);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .footer span {
+    color: #B8960E;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- COL 1 -->
+  <div class="col-header">
+    <div class="wordmark">Echelon</div>
+    <div>
+      <div class="client-label">Client</div>
+      <div class="client-name">Bloomberry<br>Resorts</div>
+      <div class="build-name">Listings Outreach Agent</div>
+      <div class="tag">Real Estate Pipeline</div>
+    </div>
+    <div class="status-row">
+      <div class="status-dot"></div>
+      <div class="status-text">Live in production · 24/7</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COL 2 -->
+  <div class="col-built">
+    <div>
+      <div class="section-label">The Problem</div>
+      <div class="problem-text">
+        Bloomberry's team was <strong>manually scraping portals, qualifying listings, and writing outreach</strong> to sellers and brokers across the Philippines. Qualified leads weren't making it to the CRM fast enough to act on.
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Integrations</div>
+      <div class="stack-grid">
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Multi-Portal Scraper MCP</div>
+            <div class="stack-desc">Lamudi, Property24, Dot Property & more</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Property Data Enrichment</div>
+            <div class="stack-desc">Listing qualification against location, price & unit type</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Gmail Outreach MCP</div>
+            <div class="stack-desc">Personalized sequences to sellers & brokers</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">HubSpot CRM MCP</div>
+            <div class="stack-desc">Lead push, deal-stage progression & sequencing</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Mem0 · GA4 · Slack Alert MCP</div>
+            <div class="stack-desc">Memory, analytics & real-time notifications</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COL 3 -->
+  <div class="col-results">
+    <div>
+      <div class="section-label">What It Does</div>
+      <div class="capabilities">
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Scrapes 300+ listings/day</strong> across Lamudi, Property24, Dot Property and more — continuously, without anyone touching it</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Qualifies automatically</strong> against location, price, and unit-type criteria — only relevant listings move forward</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Drafts and sends personalized outreach</strong> to sellers and brokers — no human writing required</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Pushes qualified leads into HubSpot</strong> enriched and ready — zero manual data entry</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Triggers follow-up and deal progression</strong> automatically based on response and stage</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-value">300+</div>
+        <div class="stat-label">listings/day processed</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">8×</div>
+        <div class="stat-label">pipeline velocity</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">0</div>
+        <div class="stat-label">manual data entry</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">4 wks</div>
+        <div class="stat-label">build to live</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">Built by <span>Echelon</span> · weareechelon.github.io/echelon</div>
+</body>
+</html>

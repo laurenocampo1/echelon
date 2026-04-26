@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JVI Mobile Marketing — Echelon Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: A4 landscape; margin: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F7F6F3;
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .card {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 30px;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: 0 4px 48px rgba(0,0,0,0.07);
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    overflow: hidden;
+    position: relative;
+    margin: 24px;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #D4AF37;
+    z-index: 1;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .divider {
+    background: rgba(0,0,0,0.07);
+    align-self: stretch;
+    margin: 32px 0;
+  }
+
+  /* COL 1 */
+  .col-header {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #F7F6F3;
+    border-radius: 30px 0 0 30px;
+  }
+
+  .wordmark {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    color: rgba(15,15,15,0.3);
+    text-transform: uppercase;
+  }
+
+  .client-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 10px;
+  }
+
+  .client-name {
+    font-size: 28px;
+    font-weight: 900;
+    color: #0F0F0F;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .build-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(15,15,15,0.45);
+    margin-bottom: 28px;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+    color: #B8960E;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22C55E;
+    flex-shrink: 0;
+  }
+
+  .status-text {
+    font-size: 11px;
+    color: rgba(15,15,15,0.4);
+    font-weight: 500;
+  }
+
+  /* COL 2 */
+  .col-built {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(15,15,15,0.3);
+    margin-bottom: 14px;
+  }
+
+  .problem-text {
+    font-size: 13px;
+    color: rgba(15,15,15,0.6);
+    line-height: 1.7;
+  }
+
+  .problem-text strong {
+    color: #0F0F0F;
+    font-weight: 600;
+  }
+
+  .stack-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .stack-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .stack-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: #F7F6F3;
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .stack-icon svg { width: 13px; height: 13px; }
+
+  .stack-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0F0F0F;
+    line-height: 1.2;
+  }
+
+  .stack-desc {
+    font-size: 10.5px;
+    color: rgba(15,15,15,0.4);
+    margin-top: 2px;
+  }
+
+  /* COL 3 */
+  .col-results {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 30px 30px 0;
+  }
+
+  .capabilities {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 14px;
+  }
+
+  .cap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cap-bullet {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #D4AF37;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .cap-text {
+    font-size: 12.5px;
+    color: rgba(15,15,15,0.6);
+    line-height: 1.5;
+  }
+
+  .cap-text strong {
+    color: #0F0F0F;
+    font-weight: 600;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-box {
+    background: #F7F6F3;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 22px;
+    font-weight: 900;
+    color: #D4AF37;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: rgba(15,15,15,0.4);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* Footer */
+  .footer {
+    font-size: 11px;
+    color: rgba(15,15,15,0.3);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .footer span {
+    color: #B8960E;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- COL 1 -->
+  <div class="col-header">
+    <div class="wordmark">Echelon</div>
+    <div>
+      <div class="client-label">Client</div>
+      <div class="client-name">JVI Mobile<br>Marketing</div>
+      <div class="build-name">Marketing Ops Agent</div>
+      <div class="tag">Marketing Operations</div>
+    </div>
+    <div class="status-row">
+      <div class="status-dot"></div>
+      <div class="status-text">Live in production · 24/7</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COL 2 -->
+  <div class="col-built">
+    <div>
+      <div class="section-label">The Problem</div>
+      <div class="problem-text">
+        A mobile marketing firm running <strong>GoHighLevel CRM, Alignable community outreach, and YouTube webinar funnels</strong> — all manually. Every lead touchpoint from first contact to booked call needed to run without human intervention.
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Integrations</div>
+      <div class="stack-grid">
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">GoHighLevel MCP</div>
+            <div class="stack-desc">CRM pipeline, lead capture, tagging & nurture</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Alignable Outreach Agent</div>
+            <div class="stack-desc">Community engagement & connections on autopilot</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">YouTube Data API MCP</div>
+            <div class="stack-desc">Webinar scheduling, promotion & follow-up</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">GA4 · Google Ads MCP · Gmail</div>
+            <div class="stack-desc">Performance tracking & email sequences</div>
+          </div>
+        </div>
+
+        <div class="stack-item">
+          <div class="stack-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <div class="stack-name">Mem0 · Lead Dedup Engine</div>
+            <div class="stack-desc">Persistent memory & cross-channel deduplication</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COL 3 -->
+  <div class="col-results">
+    <div>
+      <div class="section-label">What It Does</div>
+      <div class="capabilities">
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>GoHighLevel pipeline automation</strong> — lead capture, tagging, and nurture sequences without manual input</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Alignable outreach on autopilot</strong> — community engagement and connection requests handled end to end</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>YouTube webinar ops</strong> — scheduling, promotion, and post-event follow-up sequences fully automated</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Cross-channel lead dedup</strong> — CRM enrichment across all sources, zero duplicate contacts</div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-bullet"></div>
+          <div class="cap-text"><strong>Weekly performance digest</strong> — open rates, conversions, and pipeline movement delivered automatically</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-value">5×</div>
+        <div class="stat-label">outreach volume</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">35+</div>
+        <div class="stat-label">hrs saved/wk</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">3</div>
+        <div class="stat-label">channels unified</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">4 wks</div>
+        <div class="stat-label">build to live</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="footer">Built by <span>Echelon</span> · weareechelon.github.io/echelon</div>
+</body>
+</html>
