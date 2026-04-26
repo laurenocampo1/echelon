@@ -669,7 +669,7 @@
       <div style="display:flex; flex-direction:column; gap:12px;">
 
         <button class="build-tab active" data-build="twain" onclick="selectBuild('twain', this)">
-          <div class="bt-icon"><img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" style="filter:brightness(0) invert(1);opacity:0.85;"></div>
+          <div class="bt-icon"><img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" style="filter:brightness(0);opacity:0.7;"></div>
           <div>
             <div class="bt-name">Twain</div>
             <div class="bt-client">Girdley Media</div>
@@ -679,7 +679,7 @@
         </button>
 
         <button class="build-tab" data-build="seagear" onclick="selectBuild('seagear', this)">
-          <div class="bt-icon"><img src="https://seagearmarine.com/cdn/shop/files/seagearwhite1986_240x@2x.png?v=1732617742" style="filter:brightness(0) invert(1);opacity:0.85;"></div>
+          <div class="bt-icon"><img src="https://seagearmarine.com/cdn/shop/files/seagearwhite1986_240x@2x.png?v=1732617742" style="filter:brightness(0);opacity:0.7;"></div>
           <div>
             <div class="bt-name">E-Comm Ops</div>
             <div class="bt-client">Sea Gear Marine</div>
@@ -699,7 +699,7 @@
         </button>
 
         <button class="build-tab" data-build="aia" onclick="selectBuild('aia', this)">
-          <div class="bt-icon"><img src="https://www.aia.com.ph/content/dam/ph-wise/images/system/icons/icon-footer-logo.svg" style="filter:brightness(0) invert(1);opacity:0.85;"></div>
+          <div class="bt-icon"><img src="https://www.aia.com.ph/content/dam/ph-wise/images/system/icons/icon-footer-logo.svg" style="filter:brightness(0);opacity:0.7;"></div>
           <div>
             <div class="bt-name">Underwriting Agent</div>
             <div class="bt-client">AIA Philippines</div>
@@ -1097,7 +1097,7 @@
           <li><span class="check">✓</span> Monthly performance review</li>
           <li><span class="check">✓</span> 5 support tickets/mo included</li>
         </ul>
-        <a href="mailto:Laurenocampo.biz@gmail.com" class="tier-btn">Get started</a>
+        <button class="tier-btn" onclick="startCheckout('maintain', this)">Get started</button>
       </div>
 
       <div class="tier-card featured reveal reveal-delay-1">
@@ -1113,7 +1113,7 @@
           <li><span class="check">✓</span> Memory layer + context persistence</li>
           <li><span class="check">✓</span> 2 improvement cycles/mo</li>
         </ul>
-        <a href="mailto:Laurenocampo.biz@gmail.com" class="tier-btn">Get started</a>
+        <button class="tier-btn" onclick="startCheckout('build', this)">Get started</button>
       </div>
 
       <div class="tier-card reveal reveal-delay-2">
@@ -1129,7 +1129,7 @@
           <li><span class="check">✓</span> Proactive stack audits</li>
           <li><span class="check">✓</span> Priority response SLA (&lt;4h)</li>
         </ul>
-        <a href="mailto:Laurenocampo.biz@gmail.com" class="tier-btn">Get started</a>
+        <button class="tier-btn" onclick="startCheckout('compound', this)">Get started</button>
       </div>
 
     </div>
@@ -1913,6 +1913,35 @@ if (barsSection) barObserver.observe(barsSection);
   requestAnimationFrame(ts=>{stateStart=lastTs=ts;requestAnimationFrame(draw);});
 })();
 
+</script>
+
+<script>
+const CHECKOUT_API = 'BACKEND_URL_PLACEHOLDER/api/checkout';
+
+async function startCheckout(tier, btn) {
+  const original = btn.textContent;
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(CHECKOUT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tier })
+    });
+    const data = await res.json();
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+    } else {
+      throw new Error('No checkout URL returned');
+    }
+  } catch (err) {
+    console.error('Checkout error:', err);
+    btn.textContent = original;
+    btn.disabled = false;
+    alert('Something went wrong. Please try again or email us at Laurenocampo.biz@gmail.com');
+  }
+}
 </script>
 </body>
 </html>
