@@ -412,6 +412,86 @@
     footer { flex-direction: column; align-items: flex-start; }
   }
 
+  /* ── BUILDS INTERACTIVE ── */
+  .build-tab {
+    width:100%; display:flex; align-items:center; gap:14px;
+    background: var(--bg2); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 18px; cursor: pointer;
+    text-align:left; font-family: inherit;
+    transition: border-color .2s, background .2s, transform .15s;
+    position: relative; overflow: hidden;
+  }
+  .build-tab::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background: var(--violet); border-radius:3px 0 0 3px;
+    transform: scaleY(0); transform-origin: center;
+    transition: transform .25s ease;
+  }
+  .build-tab.active { border-color: rgba(108,99,255,.4); background: rgba(108,99,255,.08); }
+  .build-tab.active::before { transform: scaleY(1); }
+  .build-tab:hover:not(.active) { border-color: rgba(255,255,255,.15); transform: translateX(2px); }
+  .bt-icon { font-size:22px; flex-shrink:0; }
+  .bt-name { font-size:14px; font-weight:700; color: var(--white); line-height:1.3; }
+  .bt-client { font-size:11px; color: var(--violet2); font-weight:600; letter-spacing:.5px; margin-top:2px; }
+  .bt-type { font-size:11px; color: var(--gray3); margin-top:1px; }
+  .bt-arrow { margin-left:auto; color: var(--gray3); font-size:14px; transition: transform .2s, color .2s; flex-shrink:0; }
+  .build-tab.active .bt-arrow { color: var(--violet2); transform: translateX(3px); }
+
+  .build-panel {
+    position: absolute; inset: 0;
+    background: var(--bg2); border: 1px solid rgba(108,99,255,.2);
+    border-radius: 14px; padding: 36px 40px;
+    opacity: 0; pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .build-panel.active { opacity:1; pointer-events:auto; transform:translateY(0); }
+
+  .bp-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.2);
+    border-radius:20px; padding:5px 14px; margin-bottom:18px;
+    font-size:10px; font-weight:700; letter-spacing:2px; color:#86efac;
+  }
+  .live-dot {
+    width:6px; height:6px; border-radius:50%; background:#4ade80;
+    box-shadow:0 0 6px #4ade80; flex-shrink:0;
+    animation: livepulse 2s ease-in-out infinite;
+  }
+  @keyframes livepulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+  .bp-title { font-size:26px; font-weight:800; color:#fff; margin-bottom:4px; line-height:1.2; }
+  .bp-sub { font-size:12px; color:var(--gray2); margin-bottom:16px; }
+  .bp-desc { font-size:14px; color:var(--gray1); line-height:1.75; margin-bottom:20px; }
+  .bp-checks { display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+  .bp-check { display:flex; gap:10px; font-size:13px; color:var(--gray1); align-items:flex-start; }
+  .bp-check span { color:var(--violet2); font-weight:700; flex-shrink:0; }
+  .bp-bottom { display:flex; flex-direction:column; gap:16px; }
+  .bp-stack-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gray3); margin-bottom:8px; }
+  .bp-stack-pills { display:flex; flex-wrap:wrap; gap:8px; }
+  .stack-pill {
+    font-size:11px; font-weight:600; color:var(--gray1);
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+    border-radius:6px; padding:4px 10px;
+  }
+  .bp-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .bp-metric {
+    background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.18);
+    border-radius:8px; padding:12px 8px; text-align:center;
+  }
+  .bp-metric-num {
+    font-size:20px; font-weight:800;
+    background:linear-gradient(135deg,#6C63FF,#C4B5FD);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    line-height:1.1;
+  }
+  .bp-metric-label { font-size:10px; color:var(--gray2); margin-top:3px; }
+
+  @media (max-width:860px) {
+    .builds-shell { grid-template-columns:1fr !important; }
+    .build-panel { position:relative !important; inset:auto !important; }
+    .bp-metrics { grid-template-columns:repeat(2,1fr); }
+  }
+
   /* ── ARCH DIAGRAM ── */
   .pill {
     font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
@@ -479,8 +559,8 @@
 <nav>
   <img src="echelon-logo-dark.svg" alt="Echelon">
   <ul>
-    <li><a href="#problem">The Gap</a></li>
     <li><a href="#builds">Builds</a></li>
+    <li><a href="#problem">The Gap</a></li>
     <li><a href="#tiers">Pricing</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#booking" class="nav-cta">Book a Call</a></li>
@@ -502,6 +582,148 @@
   <div class="scroll-hint">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     scroll
+  </div>
+</section>
+
+<!-- BUILDS — INTERACTIVE CASE STUDIES -->
+<section id="builds" style="padding:96px 24px; background:var(--bg);">
+  <div class="section-inner">
+    <div class="section-tag reveal">Proof of Concept</div>
+    <h2 class="reveal">Built and deployed.<br><span>Not theory.</span></h2>
+    <p class="section-sub reveal">Every engagement is grounded in systems we've already run in production.</p>
+
+    <div class="builds-shell reveal" style="margin-top:56px; display:grid; grid-template-columns:300px 1fr; gap:24px; align-items:start;">
+
+      <!-- Selector cards -->
+      <div style="display:flex; flex-direction:column; gap:12px;">
+
+        <button class="build-tab active" data-build="twain" onclick="selectBuild('twain', this)">
+          <div class="bt-icon">🤖</div>
+          <div>
+            <div class="bt-name">Twain</div>
+            <div class="bt-client">Girdley Media</div>
+            <div class="bt-type">AI Ops Agent</div>
+          </div>
+          <div class="bt-arrow">→</div>
+        </button>
+
+        <button class="build-tab" data-build="seagear" onclick="selectBuild('seagear', this)">
+          <div class="bt-icon">🛒</div>
+          <div>
+            <div class="bt-name">E-Comm Ops</div>
+            <div class="bt-client">Sea Gear Marine</div>
+            <div class="bt-type">E-Commerce Agent</div>
+          </div>
+          <div class="bt-arrow">→</div>
+        </button>
+
+        <button class="build-tab" data-build="scalepath" onclick="selectBuild('scalepath', this)">
+          <div class="bt-icon">📈</div>
+          <div>
+            <div class="bt-name">Sales Intelligence</div>
+            <div class="bt-client">Scalepath</div>
+            <div class="bt-type">Pipeline Agent</div>
+          </div>
+          <div class="bt-arrow">→</div>
+        </button>
+
+      </div>
+
+      <!-- Detail panel -->
+      <div style="position:relative; min-height:480px;">
+
+        <!-- Twain -->
+        <div class="build-panel active" id="panel-twain">
+          <div class="bp-badge">
+            <span class="live-dot"></span> LIVE IN PRODUCTION
+          </div>
+          <h3 class="bp-title">Twain</h3>
+          <div class="bp-sub">AI Ops Agent — Girdley Media</div>
+          <p class="bp-desc">A fully autonomous ops agent running the day-to-day operational layer of a high-output media company. Twain handles scheduling, content routing, business monitoring, and internal communications — replacing what would have been 2–3 human ops roles.</p>
+          <div class="bp-checks">
+            <div class="bp-check"><span>✓</span> Orchestrates across 6+ tool integrations via MCP</div>
+            <div class="bp-check"><span>✓</span> Persistent memory layer retains full business context</div>
+            <div class="bp-check"><span>✓</span> Deployed on hardened VPS with 99.9% uptime</div>
+            <div class="bp-check"><span>✓</span> Zero vendor lock-in — open runtime, swappable models</div>
+          </div>
+          <div class="bp-bottom">
+            <div class="bp-stack">
+              <div class="bp-stack-label">Stack</div>
+              <div class="bp-stack-pills">
+                <span class="stack-pill">🤖 OpenClaw</span><span class="stack-pill">🧠 Claude 3.5</span><span class="stack-pill">💾 Mem0</span><span class="stack-pill">🔌 MCP</span><span class="stack-pill">🖥️ Hetzner</span><span class="stack-pill">🔒 Tailscale</span>
+              </div>
+            </div>
+            <div class="bp-metrics">
+              <div class="bp-metric"><div class="bp-metric-num">40+</div><div class="bp-metric-label">hrs saved/wk</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">4 wks</div><div class="bp-metric-label">build to live</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">6+</div><div class="bp-metric-label">integrations</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">24/7</div><div class="bp-metric-label">autonomous</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sea Gear -->
+        <div class="build-panel" id="panel-seagear">
+          <div class="bp-badge">
+            <span class="live-dot"></span> LIVE IN PRODUCTION
+          </div>
+          <h3 class="bp-title">E-Comm Ops Agent</h3>
+          <div class="bp-sub">Autonomous E-Commerce Operations — Sea Gear Marine</div>
+          <p class="bp-desc">A full-stack e-commerce operations agent handling inventory monitoring, order routing, supplier communications, and review triage for a marine gear retailer — running autonomously across their Shopify stack and supplier network.</p>
+          <div class="bp-checks">
+            <div class="bp-check"><span>✓</span> Real-time inventory alerts and reorder triggers</div>
+            <div class="bp-check"><span>✓</span> Automated supplier comms on low stock and delays</div>
+            <div class="bp-check"><span>✓</span> Review monitoring and escalation routing</div>
+            <div class="bp-check"><span>✓</span> Order exception handling and customer comms</div>
+          </div>
+          <div class="bp-bottom">
+            <div class="bp-stack">
+              <div class="bp-stack-label">Stack</div>
+              <div class="bp-stack-pills">
+                <span class="stack-pill">🛒 Shopify MCP</span><span class="stack-pill">🤖 Claude 3.5</span><span class="stack-pill">📧 Email Agent</span><span class="stack-pill">🔌 MCP</span><span class="stack-pill">💾 Mem0</span><span class="stack-pill">📊 Analytics</span>
+              </div>
+            </div>
+            <div class="bp-metrics">
+              <div class="bp-metric"><div class="bp-metric-num">0</div><div class="bp-metric-label">missed reorders</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">25+</div><div class="bp-metric-label">hrs saved/wk</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">24/7</div><div class="bp-metric-label">monitoring</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">4 wks</div><div class="bp-metric-label">build to live</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scalepath -->
+        <div class="build-panel" id="panel-scalepath">
+          <div class="bp-badge">
+            <span class="live-dot"></span> LIVE IN PRODUCTION
+          </div>
+          <h3 class="bp-title">Sales Intelligence Agent</h3>
+          <div class="bp-sub">Autonomous Pipeline Intelligence — Scalepath</div>
+          <p class="bp-desc">A sales intelligence layer built for a B2B growth advisory firm — enriching CRM leads, scoring pipeline health, automating follow-up sequences, and delivering weekly pipeline reports without a single manual touchpoint.</p>
+          <div class="bp-checks">
+            <div class="bp-check"><span>✓</span> Automated lead enrichment from 5+ data sources</div>
+            <div class="bp-check"><span>✓</span> AI lead scoring with deal priority ranking</div>
+            <div class="bp-check"><span>✓</span> Personalized follow-up sequences, drafted and queued</div>
+            <div class="bp-check"><span>✓</span> Weekly pipeline digest delivered to leadership</div>
+          </div>
+          <div class="bp-bottom">
+            <div class="bp-stack">
+              <div class="bp-stack-label">Stack</div>
+              <div class="bp-stack-pills">
+                <span class="stack-pill">📋 HubSpot MCP</span><span class="stack-pill">🤖 Claude 3.5</span><span class="stack-pill">✉️ Comms Agent</span><span class="stack-pill">🔌 MCP</span><span class="stack-pill">💾 Mem0</span><span class="stack-pill">📈 Pipeline AI</span>
+              </div>
+            </div>
+            <div class="bp-metrics">
+              <div class="bp-metric"><div class="bp-metric-num">3×</div><div class="bp-metric-label">faster response</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">30+</div><div class="bp-metric-label">hrs saved/wk</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">100%</div><div class="bp-metric-label">pipeline coverage</div></div>
+              <div class="bp-metric"><div class="bp-metric-num">4 wks</div><div class="bp-metric-label">build to live</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
@@ -928,211 +1150,6 @@
   </div>
 </section>
 
-<!-- EXAMPLE BUILDS -->
-<section id="builds" style="padding:96px 24px; background:var(--bg2);">
-  <div class="section-inner">
-    <div class="section-tag reveal">Proof of Concept</div>
-    <h2 class="reveal">Built and deployed.<br><span>Not theory.</span></h2>
-    <p class="section-sub reveal">Every Echelon engagement is grounded in systems we've already built and run in production.</p>
-
-    <div style="margin-top:56px;">
-
-      <!-- Case study: Twain -->
-      <div class="reveal" style="
-        background:var(--bg); border:1px solid rgba(108,99,255,0.25);
-        border-radius:14px; padding:48px 48px; margin-bottom:24px;
-        display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;
-      ">
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(108,99,255,0.12);border:1px solid rgba(108,99,255,0.25);border-radius:20px;padding:5px 14px;margin-bottom:20px;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#6ab04c;display:inline-block;box-shadow:0 0 6px #6ab04c;"></span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--violet2);">LIVE IN PRODUCTION</span>
-          </div>
-          <h3 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.2;">Twain</h3>
-          <div style="font-size:13px;color:var(--gray2);margin-bottom:20px;">AI Ops Agent — Girdley Media</div>
-          <p style="font-size:15px;color:var(--gray1);line-height:1.75;margin-bottom:28px;">
-            A fully autonomous ops agent built to run the day-to-day operational layer of a high-output media company. Twain handles scheduling, content routing, business monitoring, and internal communications — replacing what would have been 2–3 human ops roles.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Orchestrates across 6+ tool integrations via MCP
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Persistent memory layer retains full business context
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Deployed on hardened VPS with 99.9% uptime
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Zero vendor lock-in — open runtime, swappable models
-            </div>
-          </div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <!-- Stack badge grid -->
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-bottom:4px;">Stack</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="stack-badge"><span>🤖</span> OpenClaw</div>
-            <div class="stack-badge"><span>🧠</span> Claude 3.5</div>
-            <div class="stack-badge"><span>💾</span> Mem0</div>
-            <div class="stack-badge"><span>🔌</span> MCP Layer</div>
-            <div class="stack-badge"><span>🖥️</span> Hetzner VPS</div>
-            <div class="stack-badge"><span>🔒</span> Tailscale</div>
-          </div>
-
-          <!-- Outcome metrics -->
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-top:8px;margin-bottom:4px;">Outcomes</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">40+</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">hrs saved / week</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">4 wks</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">build to live</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">6+</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">tools integrated</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">24/7</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">autonomous ops</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case study: Sea Gear Marine -->
-      <div class="reveal" style="
-        background:var(--bg); border:1px solid rgba(108,99,255,0.25);
-        border-radius:14px; padding:48px 48px; margin-bottom:24px;
-        display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;
-      ">
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:20px;padding:5px 14px;margin-bottom:20px;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 6px #4ade80;"></span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:2px;color:#86efac;">LIVE IN PRODUCTION</span>
-          </div>
-          <h3 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.2;">E-Comm Ops Agent</h3>
-          <div style="font-size:13px;color:var(--gray2);margin-bottom:20px;">Autonomous E-Commerce Operations — Sea Gear Marine</div>
-          <p style="font-size:15px;color:var(--gray1);line-height:1.75;margin-bottom:28px;">
-            A full-stack e-commerce operations agent handling inventory monitoring, order routing, supplier communications, and review triage for a marine gear retailer — running autonomously across their Shopify stack and supplier network.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Real-time inventory alerts and reorder triggers
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Automated supplier comms on low stock and delays
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Review monitoring and escalation routing
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Order exception handling and customer comms
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-bottom:4px;">Stack</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="stack-badge"><span>🛒</span> Shopify MCP</div>
-            <div class="stack-badge"><span>🤖</span> Claude 3.5</div>
-            <div class="stack-badge"><span>📧</span> Email Agent</div>
-            <div class="stack-badge"><span>🔌</span> MCP Layer</div>
-            <div class="stack-badge"><span>💾</span> Mem0</div>
-            <div class="stack-badge"><span>📊</span> Analytics</div>
-          </div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-top:8px;margin-bottom:4px;">Outcomes</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">missed reorder cycles</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">25+</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">hrs saved / week</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">24/7</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">inventory monitoring</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">4 wks</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">build to live</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case study: Scalepath -->
-      <div class="reveal" style="
-        background:var(--bg); border:1px solid rgba(108,99,255,0.25);
-        border-radius:14px; padding:48px 48px; margin-bottom:24px;
-        display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;
-      ">
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-radius:20px;padding:5px 14px;margin-bottom:20px;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 6px #4ade80;"></span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:2px;color:#86efac;">LIVE IN PRODUCTION</span>
-          </div>
-          <h3 style="font-size:28px;font-weight:800;color:#fff;margin-bottom:8px;line-height:1.2;">Sales Intelligence Agent</h3>
-          <div style="font-size:13px;color:var(--gray2);margin-bottom:20px;">Autonomous Pipeline Intelligence — Scalepath</div>
-          <p style="font-size:15px;color:var(--gray1);line-height:1.75;margin-bottom:28px;">
-            A sales intelligence layer built for a B2B growth advisory firm — enriching CRM leads, scoring pipeline health, automating follow-up sequences, and delivering weekly pipeline reports without a single manual touchpoint.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Automated lead enrichment from 5+ data sources
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> AI lead scoring with deal priority ranking
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Personalized follow-up sequences, drafted and queued
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gray1);">
-              <span style="color:var(--violet2);font-weight:700;flex-shrink:0;">✓</span> Weekly pipeline digest delivered to leadership
-            </div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-bottom:4px;">Stack</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div class="stack-badge"><span>📋</span> HubSpot MCP</div>
-            <div class="stack-badge"><span>🤖</span> Claude 3.5</div>
-            <div class="stack-badge"><span>✉️</span> Comms Agent</div>
-            <div class="stack-badge"><span>🔌</span> MCP Layer</div>
-            <div class="stack-badge"><span>💾</span> Mem0</div>
-            <div class="stack-badge"><span>📈</span> Pipeline AI</div>
-          </div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2);margin-top:8px;margin-bottom:4px;">Outcomes</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3×</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">faster lead response</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">30+</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">hrs saved / week</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">100%</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">pipeline coverage</div>
-            </div>
-            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:8px;padding:16px;text-align:center;">
-              <div style="font-size:26px;font-weight:800;background:linear-gradient(135deg,#6C63FF,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">4 wks</div>
-              <div style="font-size:11px;color:var(--gray2);margin-top:2px;">build to live</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- FAQ -->
 <section id="faq" style="padding:96px 24px; background:var(--bg);">
@@ -1281,6 +1298,14 @@ function switchCal(who) {
     tLauren.style.background = 'transparent'; tLauren.style.color = 'var(--gray2)';
     cRc.style.display = 'block'; cLauren.style.display = 'none';
   }
+}
+
+// ── BUILDS SWITCHER ──
+function selectBuild(id, btn) {
+  document.querySelectorAll('.build-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.build-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
 }
 
 // ── FAQ TOGGLE ──
