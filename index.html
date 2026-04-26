@@ -321,15 +321,19 @@
   }
   .belt-inner:hover { animation-play-state: paused; }
   .brand-item {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center; gap: 48px;
     padding: 0 40px;
-    font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gray3);
-    transition: color .3s;
     flex-shrink: 0;
   }
-  .brand-item:hover { color: var(--gray2); }
-  .brand-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gray3); display: inline-block; }
+  .brand-item img {
+    height: 24px; width: auto; max-width: 120px;
+    object-fit: contain;
+    opacity: 0.35;
+    filter: brightness(0) invert(1);
+    transition: opacity .3s;
+  }
+  .brand-item:hover img { opacity: 0.6; }
+  .brand-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gray3); display: inline-block; flex-shrink:0; }
   @keyframes slide {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -1053,17 +1057,35 @@
   <div class="belt-label reveal">Proof of Work</div>
   <div class="belt-track">
     <div class="belt-inner">
-      <span class="brand-item"><img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" style="height:18px;width:auto;object-fit:contain;opacity:0.35;vertical-align:middle;filter:brightness(0) invert(1);"> <span class="brand-dot"></span></span>
-      <span class="brand-item">Scalepath <span class="brand-dot"></span></span>
-      <span class="brand-item">JVI Mobile Marketing <span class="brand-dot"></span></span>
-      <span class="brand-item">Sea Gear Marine <span class="brand-dot"></span></span>
-      <span class="brand-item">OpenClaw <span class="brand-dot"></span></span>
+      <span class="brand-item">
+        <img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" alt="Girdley Media">
+        <span class="brand-dot"></span>
+        <img src="scalepath-logo.png" alt="Scalepath">
+        <span class="brand-dot"></span>
+        <img src="https://www.jvimobile.com/wp-content/uploads/jvi_2016_logo-Cropped-1.png" alt="JVI Mobile Marketing">
+        <span class="brand-dot"></span>
+        <img src="https://seagearmarine.com/cdn/shop/files/seagearwhite1986_240x@2x.png?v=1732617742" alt="Sea Gear Marine">
+        <span class="brand-dot"></span>
+        <img src="https://www.aia.com.ph/content/dam/ph-wise/images/system/icons/icon-footer-logo.svg" alt="AIA Philippines">
+        <span class="brand-dot"></span>
+        <img src="https://www.bloomberry.ph/storage/logos/1607996429_BRC%20-%20Height%20500px.jpg" alt="Bloomberry Resorts" style="border-radius:3px;">
+        <span class="brand-dot"></span>
+      </span>
       <!-- duplicate for seamless loop -->
-      <span class="brand-item"><img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" style="height:18px;width:auto;object-fit:contain;opacity:0.35;vertical-align:middle;filter:brightness(0) invert(1);"> <span class="brand-dot"></span></span>
-      <span class="brand-item">Scalepath <span class="brand-dot"></span></span>
-      <span class="brand-item">JVI Mobile Marketing <span class="brand-dot"></span></span>
-      <span class="brand-item">Sea Gear Marine <span class="brand-dot"></span></span>
-      <span class="brand-item">OpenClaw <span class="brand-dot"></span></span>
+      <span class="brand-item">
+        <img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" alt="Girdley Media">
+        <span class="brand-dot"></span>
+        <img src="scalepath-logo.png" alt="Scalepath">
+        <span class="brand-dot"></span>
+        <img src="https://www.jvimobile.com/wp-content/uploads/jvi_2016_logo-Cropped-1.png" alt="JVI Mobile Marketing">
+        <span class="brand-dot"></span>
+        <img src="https://seagearmarine.com/cdn/shop/files/seagearwhite1986_240x@2x.png?v=1732617742" alt="Sea Gear Marine">
+        <span class="brand-dot"></span>
+        <img src="https://www.aia.com.ph/content/dam/ph-wise/images/system/icons/icon-footer-logo.svg" alt="AIA Philippines">
+        <span class="brand-dot"></span>
+        <img src="https://www.bloomberry.ph/storage/logos/1607996429_BRC%20-%20Height%20500px.jpg" alt="Bloomberry Resorts" style="border-radius:3px;">
+        <span class="brand-dot"></span>
+      </span>
     </div>
   </div>
 </section>
