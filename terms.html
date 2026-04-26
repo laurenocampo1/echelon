@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Echelon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #F7F6F3;
+    --bg2:     #FFFFFF;
+    --bg3:     #ECEAE6;
+    --violet:  #C9A227;
+    --white:   #0F0F0F;
+    --gray1:   #1A1A1A;
+    --gray2:   #717171;
+    --gray3:   #A8A7A3;
+    --radius:  10px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--gray1);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(247,246,243,0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  nav a.wordmark {
+    font-size: 15px; font-weight: 800; letter-spacing: 5px;
+    color: #0F0F0F; text-transform: uppercase; font-family: 'Inter', sans-serif;
+    text-decoration: none;
+  }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav ul a {
+    color: var(--gray2); text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: color .2s;
+  }
+  nav ul a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--violet); color: #0F0F0F !important;
+    padding: 8px 20px; border-radius: 6px; font-size: 13px !important;
+    transition: opacity .2s !important;
+  }
+  .nav-cta:hover { opacity: .85; }
+
+  .page-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 120px 32px 100px;
+  }
+
+  .page-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #D4AF37;
+    border: 1px solid rgba(212,175,55,.3);
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+    background: rgba(212,175,55,.08);
+  }
+
+  h1 {
+    font-size: 40px; font-weight: 800; letter-spacing: -1px;
+    color: #0F0F0F; margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .last-updated {
+    font-size: 13px; color: var(--gray3); margin-bottom: 56px;
+  }
+
+  h2 {
+    font-size: 18px; font-weight: 700; color: #0F0F0F;
+    margin: 48px 0 12px;
+    letter-spacing: -0.3px;
+  }
+
+  p { color: var(--gray2); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  ul, ol {
+    color: var(--gray2);
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  li { margin-bottom: 8px; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin: 0 0 48px;
+  }
+
+  a { color: var(--violet); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  footer {
+    background: #0F0F0F;
+    color: rgba(245,245,240,0.5);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 48px;
+    font-size: 12px;
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer .footer-links { display: flex; gap: 24px; }
+  footer .footer-links a { color: rgba(245,245,240,0.4); text-decoration: none; font-size: 12px; transition: color .2s; }
+  footer .footer-links a:hover { color: rgba(245,245,240,0.8); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="wordmark">ECHELON</a>
+  <ul>
+    <li><a href="index.html#builds">Builds</a></li>
+    <li><a href="index.html#problem">The Gap</a></li>
+    <li><a href="index.html#tiers">Pricing</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-label">Legal</div>
+  <h1>Terms of Service</h1>
+  <p class="last-updated">Last updated: April 27, 2026</p>
+  <hr class="divider">
+
+  <h2>1. Acceptance of Terms</h2>
+  <p>By engaging Echelon's services, accessing our website, or entering into a service agreement with us, you agree to be bound by these Terms of Service. If you do not agree, do not use our services.</p>
+
+  <h2>2. Services</h2>
+  <p>Echelon provides AI operations consulting and agentic system development services. Our service tiers are as follows:</p>
+  <ul>
+    <li><strong>Maintain</strong> — Retainer support; no new feature development</li>
+    <li><strong>Build</strong> — Active development with two improvement cycles per month; minimum 3-month engagement</li>
+    <li><strong>Compound</strong> — Unlimited development cycles; full operations partnership</li>
+  </ul>
+  <p>The specific scope of work, deliverables, and timelines are defined in a separate Statement of Work (SOW) or service agreement executed between Echelon and the client.</p>
+
+  <h2>3. Payment Terms</h2>
+  <p>All fees are billed monthly in advance via Paddle, our authorized payment processor. Payments are due at the start of each billing period. Overages beyond the included cycles are billed at $800 per additional cycle and invoiced at the end of the billing period.</p>
+  <p>Failure to remit payment within 7 days of the due date may result in suspension of services until the outstanding balance is settled.</p>
+
+  <h2>4. Intellectual Property</h2>
+  <p>Upon receipt of full payment for a given engagement, all custom-built systems, workflows, automations, and deliverables produced by Echelon on your behalf become your property. Echelon retains the right to reference the engagement as a case study (without disclosing confidential business data) unless the client requests otherwise in writing.</p>
+  <p>Echelon retains ownership of any proprietary frameworks, base tooling, or internal methodologies used to deliver services. These are licensed to you for use within the context of the engagement, not transferred.</p>
+
+  <h2>5. Confidentiality</h2>
+  <p>Both parties agree to keep confidential any non-public information shared during the engagement. This obligation survives termination of the agreement for a period of two (2) years.</p>
+
+  <h2>6. Limitation of Liability</h2>
+  <p>Echelon's liability under any engagement is limited to the total fees paid in the three (3) months prior to the claim. Echelon is not liable for indirect, incidental, or consequential damages, including lost revenue or data loss arising from AI system outputs.</p>
+  <p>AI systems involve probabilistic outputs. You are responsible for human review of any automated decisions that affect your customers, employees, or compliance obligations.</p>
+
+  <h2>7. Termination</h2>
+  <p>Either party may terminate the agreement with 30 days written notice. Fees already paid are non-refundable except as described in our <a href="refund.html">Refund Policy</a>. Upon termination, Echelon will deliver all client-owned work product within 14 days.</p>
+
+  <h2>8. Governing Law</h2>
+  <p>These terms are governed by the laws of the applicable jurisdiction agreed upon in the client service agreement. Disputes shall be resolved through good-faith negotiation, and if unresolved, through binding arbitration.</p>
+
+  <h2>9. Changes to These Terms</h2>
+  <p>We may update these Terms at any time. Continued use of our services after changes constitutes acceptance. We will notify active clients of material changes via email.</p>
+
+  <h2>10. Contact</h2>
+  <p>For questions regarding these Terms, contact us at <a href="mailto:Laurenocampo.biz@gmail.com">Laurenocampo.biz@gmail.com</a>.</p>
+</div>
+
+<footer>
+  <span style="font-size:13px;font-weight:800;letter-spacing:4px;color:rgba(245,245,240,0.5);text-transform:uppercase;font-family:'Inter',sans-serif;">ECHELON</span>
+  <div class="footer-links">
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="refund.html">Refund Policy</a>
+  </div>
+  <div>© 2026 Echelon. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
