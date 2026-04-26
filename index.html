@@ -451,6 +451,19 @@
     to   { opacity:1; transform:translateY(0); }
   }
 
+  .bp-client-logo {
+    display: flex; align-items: center; margin-bottom: 20px;
+  }
+  .bp-client-logo img {
+    height: 28px; width: auto; object-fit: contain;
+    filter: brightness(0) invert(1); opacity: 0.75;
+  }
+  .bp-client-logo-text {
+    display: inline-flex; align-items: center;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 6px 14px;
+    font-size: 13px; font-weight: 700; color: var(--gray1); letter-spacing: .5px;
+  }
   .bp-badge {
     display:inline-flex; align-items:center; gap:8px;
     background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.2);
@@ -658,6 +671,9 @@
 
         <!-- Twain -->
         <div class="build-panel active" id="panel-twain">
+          <div class="bp-client-logo">
+            <img src="https://cdn.prod.website-files.com/653efa19f29fc491d2b2113f/6578d0bc12c0804e902d9187_Girdley-Logo-White-p-500.png" alt="Girdley Media">
+          </div>
           <div class="bp-badge">
             <span class="live-dot"></span> LIVE IN PRODUCTION
           </div>
@@ -688,6 +704,9 @@
 
         <!-- Sea Gear -->
         <div class="build-panel" id="panel-seagear">
+          <div class="bp-client-logo">
+            <img src="https://seagearmarine.com/cdn/shop/files/seagearwhite1986_240x@2x.png?v=1732617742" alt="Sea Gear Marine">
+          </div>
           <div class="bp-badge">
             <span class="live-dot"></span> LIVE IN PRODUCTION
           </div>
@@ -718,6 +737,9 @@
 
         <!-- Scalepath -->
         <div class="build-panel" id="panel-scalepath">
+          <div class="bp-client-logo">
+            <span class="bp-client-logo-text">Scalepath</span>
+          </div>
           <div class="bp-badge">
             <span class="live-dot"></span> LIVE IN PRODUCTION
           </div>
@@ -748,6 +770,9 @@
 
         <!-- AIA Philippines -->
         <div class="build-panel" id="panel-aia">
+          <div class="bp-client-logo">
+            <span class="bp-client-logo-text">AIA Philippines</span>
+          </div>
           <div class="bp-badge">
             <span class="live-dot"></span> LIVE IN PRODUCTION
           </div>
@@ -779,6 +804,9 @@
 
         <!-- Ayala Land -->
         <div class="build-panel" id="panel-ayala">
+          <div class="bp-client-logo">
+            <span class="bp-client-logo-text">Ayala Land</span>
+          </div>
           <div class="bp-badge">
             <span class="live-dot"></span> LIVE IN PRODUCTION
           </div>
