@@ -91,7 +91,7 @@
     display: flex; align-items: flex-start; justify-content: center;
   }
   #agentCanvas {
-    width: 100%; max-width: 480px; height: auto;
+    width: 100%; max-width: 100%; height: auto;
     border-radius: 16px;
     border: 1px solid rgba(0,0,0,0.08);
     background: rgba(247,246,243,0.8);
@@ -689,7 +689,7 @@
         </button>
 
         <button class="build-tab" data-build="scalepath" onclick="selectBuild('scalepath', this)">
-          <div class="bt-icon"><img src="scalepath-logo.png" style="opacity:0.85;"></div>
+          <div class="bt-icon"><img src="scalepath-logo.png" style="filter:brightness(0);opacity:0.75;"></div>
           <div>
             <div class="bt-name">Sales Intelligence</div>
             <div class="bt-client">Scalepath</div>
@@ -1721,11 +1721,11 @@ if (barsSection) barObserver.observe(barsSection);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const CW=480, PAD=20;
-  const CARD_W=436, CARD_H=372;
+  const CW=560, PAD=24;
+  const CARD_W=518, CARD_H=460;
   // 3 stacked cards — each offset 12px right/down from the one in front
   const STACK = [{x:8,y:4},{x:20,y:16},{x:32,y:28}]; // front→back
-  const CH = STACK[2].y + CARD_H + 24;
+  const CH = STACK[2].y + CARD_H + 28;
   canvas.width=CW; canvas.height=CH;
 
   const GOLD='#C9A227';
@@ -1795,7 +1795,7 @@ if (barsSection) barObserver.observe(barsSection);
     ctx.beginPath(); ctx.moveTo(x+PAD,y+58); ctx.lineTo(x+CARD_W-PAD,y+58); ctx.stroke();
 
     // ── Steps ──
-    const STEP_H=52, STEPS_Y=y+70;
+    const STEP_H=64, STEPS_Y=y+76;
     b.steps.forEach((step,i)=>{
       const sy=STEPS_Y+i*STEP_H;
       const isActive=(i===activeStep);
@@ -1831,13 +1831,13 @@ if (barsSection) barObserver.observe(barsSection);
 
     // ── Divider ──
     ctx.strokeStyle=WA(0.07); ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(x+PAD,y+CARD_H-80); ctx.lineTo(x+CARD_W-PAD,y+CARD_H-80); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x+PAD,y+CARD_H-96); ctx.lineTo(x+CARD_W-PAD,y+CARD_H-96); ctx.stroke();
 
     // ── Metrics ──
     const mW=Math.floor((CARD_W-PAD*2-12)/3);
     b.metrics.forEach((m,i)=>{
       const mx=x+PAD+i*(mW+6)+mW/2;
-      const my=y+CARD_H-52;
+      const my=y+CARD_H-64;
       ctx.textAlign='center'; ctx.textBaseline='middle';
       ctx.fillStyle=GA(0.88); ctx.font='700 20px Inter,sans-serif';
       ctx.fillText(m.val, mx, my);
