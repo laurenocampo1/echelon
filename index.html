@@ -638,7 +638,6 @@
   <canvas id="particles"></canvas>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="eyebrow">AI Operations Consulting</div>
       <h1>Your business,<br><span>one layer above</span><br>the competition.</h1>
       <p class="hero-sub">We architect agentic AI systems that replace manual workflows — giving small teams the operational leverage of companies 10× their size.</p>
       <div class="hero-btns">
@@ -1721,20 +1720,17 @@ if (barsSection) barObserver.observe(barsSection);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  // Layout constants
-  const CW=480, PAD=22;
-  const HEADER_H=52, TITLE_H=40, STEP_H=44, STEP_GAP=5;
-  const METRICS_H=54, STACK_H=36, ROCKY_X=20, ROCKY_SZ=9;
-  const yHeader=0, yTitle=HEADER_H, ySteps=HEADER_H+TITLE_H+10;
-  const yMetrics=ySteps+4*(STEP_H+STEP_GAP)+12;
-  const yStack=yMetrics+METRICS_H+10;
-  const yPBar=yStack+STACK_H+16;
-  const CH=yPBar+14;
+  const CW=480, PAD=20;
+  const CARD_W=436, CARD_H=372;
+  // 3 stacked cards — each offset 12px right/down from the one in front
+  const STACK = [{x:8,y:4},{x:20,y:16},{x:32,y:28}]; // front→back
+  const CH = STACK[2].y + CARD_H + 24;
   canvas.width=CW; canvas.height=CH;
 
   const GOLD='#D4AF37';
   const GA=a=>`rgba(212,175,55,${a})`;
   const WA=a=>`rgba(245,245,240,${a})`;
+  const ALPHA=[1.0,0.55,0.28]; // front→back opacity
 
   function rr(x,y,w,h,r){
     ctx.beginPath();
@@ -1745,223 +1741,175 @@ if (barsSection) barObserver.observe(barsSection);
     ctx.arcTo(x,y,x+r,y,r);ctx.closePath();
   }
   function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t;}
+  function lerp(a,b,t){return a+(b-a)*t;}
 
   const BUILDS=[
     { client:'Girdley Media', tag:'CONTENT OPS AGENT',
       steps:['Slack brief received','Claude drafts post','Beehiiv scheduled','Analytics logged'],
-      metrics:[{label:'Posts/wk',val:'12'},{label:'Avg reach',val:'41K'},{label:'Time saved',val:'18 hrs'}],
-      stack:['Claude','Beehiiv','Google Sheets','Slack','n8n'] },
+      metrics:[{label:'Posts/wk',val:'12'},{label:'Avg reach',val:'41K'},{label:'Time saved',val:'18 hrs'}] },
     { client:'Sea Gear Marine', tag:'E-COMM OPS',
       steps:['Order intake parsed','Inventory checked','Fulfillment triggered','Status pushed'],
-      metrics:[{label:'Orders/day',val:'340'},{label:'Error rate',val:'0.3%'},{label:'Time saved',val:'22 hrs'}],
-      stack:['Claude','Shopify','ShipStation','Slack','Airtable'] },
+      metrics:[{label:'Orders/day',val:'340'},{label:'Error rate',val:'0.3%'},{label:'Time saved',val:'22 hrs'}] },
     { client:'Scalepath', tag:'SALES INTELLIGENCE',
       steps:['Lead list ingested','ICP scored','Outreach drafted','CRM updated'],
-      metrics:[{label:'Leads/mo',val:'2.4K'},{label:'Reply rate',val:'11%'},{label:'Time saved',val:'31 hrs'}],
-      stack:['Claude','HubSpot','Apollo','Google Sheets','Slack'] },
+      metrics:[{label:'Leads/mo',val:'2.4K'},{label:'Reply rate',val:'11%'},{label:'Time saved',val:'31 hrs'}] },
     { client:'AIA Philippines', tag:'UNDERWRITING',
       steps:['Application received','Risk factors extracted','Policy scored','Decision logged'],
-      metrics:[{label:'Apps/day',val:'180'},{label:'Accuracy',val:'96%'},{label:'Time saved',val:'40 hrs'}],
-      stack:['Claude','Internal API','Google Drive','Notion','Slack'] },
+      metrics:[{label:'Apps/day',val:'180'},{label:'Accuracy',val:'96%'},{label:'Time saved',val:'40 hrs'}] },
     { client:'Bloomberry Resorts', tag:'LISTINGS OUTREACH',
       steps:['Property data pulled','Listing copy drafted','Channel posted','Leads captured'],
-      metrics:[{label:'Listings/mo',val:'85'},{label:'Inq. rate',val:'+34%'},{label:'Time saved',val:'26 hrs'}],
-      stack:['Claude','Airtable','WordPress','Slack','Zapier'] },
+      metrics:[{label:'Listings/mo',val:'85'},{label:'Inq. rate',val:'+34%'},{label:'Time saved',val:'26 hrs'}] },
     { client:'JVI Mobile', tag:'MARKETING OPS',
       steps:['Campaign brief in','Creatives generated','A/B scheduled','Report compiled'],
-      metrics:[{label:'Campaigns/mo',val:'28'},{label:'CTR lift',val:'+22%'},{label:'Time saved',val:'19 hrs'}],
-      stack:['Claude','Meta API','Google Ads','Sheets','Slack'] },
+      metrics:[{label:'Campaigns/mo',val:'28'},{label:'CTR lift',val:'+22%'},{label:'Time saved',val:'19 hrs'}] },
   ];
 
-  // row-stagger alpha: scan line sweeps top→bottom (IN) or bottom→top (OUT)
-  function rowA(progress,rowIdx,totalRows,dir){
-    const center=dir===1?rowIdx/totalRows:(totalRows-1-rowIdx)/totalRows;
-    const lo=center, hi=center+1.4/totalRows;
-    return Math.max(0,Math.min(1,(progress-lo)/(hi-lo)));
-  }
+  function drawCard(b, x, y, alpha, ts, isTop){
+    ctx.save(); ctx.globalAlpha=alpha;
+    // shadow for depth
+    ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=isTop?24:8; ctx.shadowOffsetY=isTop?8:3;
+    rr(x,y,CARD_W,CARD_H,14);
+    ctx.fillStyle='#1A1A1A'; ctx.fill();
+    ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.strokeStyle=isTop?GA(0.38):GA(0.14); ctx.lineWidth=1; ctx.stroke();
 
-  function drawRocky(x,y,size,ts,alpha){
-    if(alpha<=0)return;
-    ctx.save();ctx.globalAlpha=alpha;
-    ctx.shadowColor=GOLD;ctx.shadowBlur=14;
-    for(let i=0;i<5;i++){
-      const base=(i/5)*Math.PI*2-Math.PI/2;
-      const wave=Math.sin(ts*0.004+i*1.26)*0.35;
-      const tip=base+wave, bend=base+wave*0.5;
-      const tx=x+Math.cos(tip)*size, ty=y+Math.sin(tip)*size;
-      const bx=x+Math.cos(bend)*size*0.58, by=y+Math.sin(bend)*size*0.58;
-      ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(bx,by,tx,ty);
-      ctx.strokeStyle=GA(0.75);ctx.lineWidth=1.6;ctx.stroke();
-      ctx.beginPath();ctx.arc(tx,ty,2,0,Math.PI*2);
-      ctx.fillStyle=GOLD;ctx.fill();
-    }
-    ctx.beginPath();ctx.arc(x,y,size*0.38,0,Math.PI*2);
-    ctx.fillStyle=GA(0.92);ctx.fill();
-    ctx.strokeStyle=GOLD;ctx.lineWidth=1.4;ctx.stroke();
-    ctx.beginPath();ctx.arc(x-size*0.1,y-size*0.1,size*0.1,0,Math.PI*2);
-    ctx.fillStyle=WA(0.6);ctx.fill();
-    ctx.restore();
-  }
+    if(!isTop){ ctx.restore(); return; } // back cards: just the shell
 
-  function pill(label,x,y,alpha){
-    ctx.save();ctx.globalAlpha=alpha;
-    ctx.font='600 10px Inter,sans-serif';
-    const w=ctx.measureText(label).width+16;
-    rr(x,y-10,w,20,10);
-    ctx.fillStyle='#222';ctx.fill();
-    ctx.strokeStyle=GA(0.35);ctx.lineWidth=1;ctx.stroke();
-    ctx.fillStyle=WA(0.7);ctx.textAlign='left';ctx.textBaseline='middle';
-    ctx.fillText(label,x+8,y);
-    ctx.restore();
-    return w;
-  }
+    // ── LIVE badge ──
+    ctx.textAlign='left'; ctx.textBaseline='middle';
+    ctx.fillStyle=GA(0.85); ctx.font='700 9px Inter,sans-serif';
+    ctx.fillText('● LIVE',x+PAD,y+22);
 
-  function drawBuild(b,alpha,ts,scanProgress,scanDir){
-    const ROWS=8; // header + 4 steps + metrics + stack + spare
-    const hasScan=scanProgress>=0;
-    const sA=(r)=>hasScan?rowA(scanProgress,r,ROWS,scanDir)*alpha:alpha;
+    // ── Client name ──
+    ctx.fillStyle=WA(0.92); ctx.font='700 15px Inter,sans-serif';
+    ctx.fillText(b.client, x+PAD, y+42);
 
-    // ── HEADER ──
-    ctx.save();ctx.globalAlpha=sA(0);
-    rr(0,yHeader,CW,HEADER_H,0);
-    ctx.fillStyle='#161616';ctx.fill();
-    ctx.textBaseline='middle';ctx.textAlign='left';
-    ctx.fillStyle=GA(0.9);ctx.font='700 9px Inter,sans-serif';
-    ctx.fillText('● LIVE  ECHELON AGENT RUNTIME',PAD,yHeader+HEADER_H/2-8);
-    ctx.fillStyle=WA(0.45);ctx.font='500 10px Inter,sans-serif';
-    ctx.fillText(b.tag,PAD,yHeader+HEADER_H/2+8);
+    // ── Tag (right) ──
     ctx.textAlign='right';
-    ctx.fillStyle=GA(0.75);ctx.font='700 11px Inter,sans-serif';
-    ctx.fillText(b.client,CW-PAD,yHeader+HEADER_H/2);
-    ctx.restore();
+    ctx.fillStyle=GA(0.6); ctx.font='500 9px Inter,sans-serif';
+    ctx.fillText(b.tag, x+CARD_W-PAD, y+42);
 
-    // ── SCAN LINE ──
-    if(hasScan){
-      const sy=yHeader+scanProgress*(CH-yHeader);
-      ctx.save();
-      ctx.globalAlpha=0.5*alpha;ctx.fillStyle=GOLD;ctx.fillRect(0,sy,CW,1.5);
-      ctx.globalAlpha=0.2*alpha;
-      ctx.fillStyle='rgba(0,200,255,1)';ctx.fillRect(0,sy-2,CW,1);
-      ctx.fillStyle='rgba(255,50,100,1)';ctx.fillRect(0,sy+2,CW,1);
-      ctx.restore();
-    }
+    // ── Divider ──
+    ctx.strokeStyle=WA(0.07); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(x+PAD,y+58); ctx.lineTo(x+CARD_W-PAD,y+58); ctx.stroke();
 
-    // ── STEPS ──
+    // ── Steps ──
+    const STEP_H=52, STEPS_Y=y+70;
     b.steps.forEach((step,i)=>{
-      const sa=sA(1+i);
-      const sy=ySteps+i*(STEP_H+STEP_GAP);
+      const sy=STEPS_Y+i*STEP_H;
       const isActive=(i===activeStep);
-      ctx.save();ctx.globalAlpha=sa;
-      if(isActive){ctx.shadowColor=GOLD;ctx.shadowBlur=12;}
-      rr(PAD+18,sy,CW-PAD*2-18,STEP_H,8);
-      ctx.fillStyle=isActive?'#1e1a0e':'#151515';ctx.fill();
-      ctx.strokeStyle=isActive?GA(0.65):WA(0.08);ctx.lineWidth=isActive?1.5:1;ctx.stroke();
-      ctx.shadowBlur=0;
-      ctx.textBaseline='middle';ctx.textAlign='left';
-      ctx.fillStyle=isActive?GA(0.9):WA(0.22);ctx.font='700 10px Inter,sans-serif';
-      ctx.fillText(String(i+1).padStart(2,'0'),PAD+26,sy+STEP_H/2);
-      ctx.fillStyle=isActive?WA(0.92):WA(0.38);ctx.font=(isActive?'600':'400')+' 12px Inter,sans-serif';
-      ctx.fillText(step,PAD+46,sy+STEP_H/2);
+      ctx.textAlign='left'; ctx.textBaseline='middle';
+
+      // row bg on active
       if(isActive){
-        ctx.beginPath();ctx.arc(CW-PAD-10,sy+STEP_H/2,4,0,Math.PI*2);
-        ctx.fillStyle=GOLD;ctx.globalAlpha=sa*(0.8+Math.sin(ts*0.006)*0.2);ctx.fill();
+        ctx.save(); ctx.globalAlpha=alpha*0.55;
+        rr(x+PAD,sy-10,CARD_W-PAD*2,36,7);
+        ctx.fillStyle='#231f0e'; ctx.fill();
+        ctx.strokeStyle=GA(0.3); ctx.lineWidth=1; ctx.stroke();
+        ctx.restore();
       }
-      ctx.restore();
+
+      // step number
+      ctx.fillStyle=isActive?GA(0.85):WA(0.18);
+      ctx.font='700 9px Inter,sans-serif';
+      ctx.fillText(String(i+1).padStart(2,'0'), x+PAD+4, sy+8);
+
+      // step text
+      ctx.fillStyle=isActive?WA(0.9):WA(0.35);
+      ctx.font=(isActive?'600':'400')+' 12px Inter,sans-serif';
+      ctx.fillText(step, x+PAD+28, sy+8);
+
+      // active pulse dot
+      if(isActive){
+        const pulse=0.7+Math.sin(ts*0.006)*0.3;
+        ctx.beginPath(); ctx.arc(x+CARD_W-PAD-8, sy+8, 4, 0, Math.PI*2);
+        ctx.fillStyle=GOLD; ctx.globalAlpha=alpha*pulse; ctx.fill();
+        ctx.globalAlpha=alpha;
+      }
     });
 
-    // ── METRICS ──
-    const mA=sA(5);
-    ctx.save();ctx.globalAlpha=mA;
-    const mW=Math.floor((CW-PAD*2-16)/3);
+    // ── Divider ──
+    ctx.strokeStyle=WA(0.07); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(x+PAD,y+CARD_H-80); ctx.lineTo(x+CARD_W-PAD,y+CARD_H-80); ctx.stroke();
+
+    // ── Metrics ──
+    const mW=Math.floor((CARD_W-PAD*2-12)/3);
     b.metrics.forEach((m,i)=>{
-      const mx=PAD+i*(mW+8);
-      rr(mx,yMetrics,mW,METRICS_H,8);
-      ctx.fillStyle='#141414';ctx.fill();
-      ctx.strokeStyle=WA(0.07);ctx.lineWidth=1;ctx.stroke();
-      ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillStyle=GA(0.85);ctx.font='700 18px Inter,sans-serif';
-      ctx.fillText(m.val,mx+mW/2,yMetrics+METRICS_H/2-7);
-      ctx.fillStyle=WA(0.38);ctx.font='500 9px Inter,sans-serif';
-      ctx.fillText(m.label.toUpperCase(),mx+mW/2,yMetrics+METRICS_H/2+11);
+      const mx=x+PAD+i*(mW+6)+mW/2;
+      const my=y+CARD_H-52;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillStyle=GA(0.88); ctx.font='700 20px Inter,sans-serif';
+      ctx.fillText(m.val, mx, my);
+      ctx.fillStyle=WA(0.32); ctx.font='400 9px Inter,sans-serif';
+      ctx.fillText(m.label.toUpperCase(), mx, my+18);
     });
-    ctx.restore();
 
-    // ── STACK PILLS (scrolling) ──
-    const stA=sA(6);
-    ctx.save();ctx.globalAlpha=stA;
-    ctx.beginPath();ctx.rect(PAD,yStack,CW-PAD*2,STACK_H);ctx.clip();
-    let px=PAD-stackScroll;
-    b.stack.forEach(s=>{px+=pill(s,px,yStack+STACK_H/2,1)+8;});
-    if(px<CW+PAD){let px2=px;b.stack.forEach(s=>{px2+=pill(s,px2,yStack+STACK_H/2,1)+8;});}
     ctx.restore();
   }
 
-  const S={RUN:0,OUT:1,IN:2};
+  const S={RUN:0,EXIT:1};
   let state=S.RUN, buildIdx=0;
   let stateStart=0, lastTs=0;
   let activeStep=0, stepTimer=0;
-  let stackScroll=0, stackDir=1;
-  let rockyY=0, rockyTargetY=0;
-  const SCENE_MS=5000, TRANS_MS=800, STEP_MS=1200;
+  const SCENE_MS=4000, TRANS_MS=520, STEP_MS=1100;
 
   function draw(ts){
-    const dt=Math.min(ts-lastTs,80);lastTs=ts;
+    const dt=Math.min(ts-lastTs,80); lastTs=ts;
     const elapsed=ts-stateStart;
-    const raw=Math.max(0,Math.min(1,elapsed/TRANS_MS));
-    const te=ease(raw);
+    const te=ease(Math.max(0,Math.min(1,elapsed/TRANS_MS)));
 
-    if(state===S.RUN&&elapsed>SCENE_MS){
-      state=S.OUT;stateStart=ts;
-    } else if(state===S.OUT&&elapsed>TRANS_MS){
-      state=S.IN;stateStart=ts;
+    if(state===S.RUN && elapsed>SCENE_MS){
+      state=S.EXIT; stateStart=ts;
+    } else if(state===S.EXIT && elapsed>TRANS_MS){
+      state=S.RUN; stateStart=ts;
       buildIdx=(buildIdx+1)%BUILDS.length;
-      activeStep=0;stepTimer=0;stackScroll=0;stackDir=1;
-      rockyY=ySteps+STEP_H/2;rockyTargetY=rockyY;
-    } else if(state===S.IN&&elapsed>TRANS_MS){
-      state=S.RUN;stateStart=ts;
+      activeStep=0; stepTimer=0;
     }
 
     if(state===S.RUN){
       stepTimer+=dt;
-      if(stepTimer>STEP_MS){
-        stepTimer=0;
-        activeStep=(activeStep+1)%BUILDS[buildIdx].steps.length;
-        rockyTargetY=ySteps+activeStep*(STEP_H+STEP_GAP)+STEP_H/2;
-      }
+      if(stepTimer>STEP_MS){ stepTimer=0; activeStep=(activeStep+1)%BUILDS[buildIdx].steps.length; }
     }
-
-    stackScroll+=dt*0.03*stackDir;
-    if(stackScroll>180)stackDir=-1;
-    if(stackScroll<0)stackDir=1;
-
-    rockyY+=(rockyTargetY-rockyY)*0.08;
 
     ctx.clearRect(0,0,CW,CH);
 
-    const prevIdx=(buildIdx-1+BUILDS.length)%BUILDS.length;
+    const n=BUILDS.length;
+    const cur=buildIdx, nxt=(buildIdx+1)%n;
+    const b2=(buildIdx+2)%n; // back card
+
     if(state===S.RUN){
-      drawBuild(BUILDS[buildIdx],1,ts,-1,0);
-    } else if(state===S.OUT){
-      drawBuild(BUILDS[prevIdx],1,ts,te,-1);
+      // back → mid → front (draw back-to-front)
+      drawCard(BUILDS[b2],  STACK[2].x, STACK[2].y, ALPHA[2], ts, false);
+      drawCard(BUILDS[(buildIdx+1)%n], STACK[1].x, STACK[1].y, ALPHA[1], ts, false);
+      drawCard(BUILDS[cur], STACK[0].x, STACK[0].y, ALPHA[0], ts, true);
     } else {
-      drawBuild(BUILDS[buildIdx],1,ts,te,1);
+      // EXIT: front slides left out, mid→front, back→mid, new card fades in at back
+      const newBack=(buildIdx+3)%n;
+      // newest card fading in at back
+      drawCard(BUILDS[newBack], STACK[2].x, STACK[2].y, ALPHA[2]*te, ts, false);
+      // old back → mid position
+      drawCard(BUILDS[b2],
+        lerp(STACK[2].x,STACK[1].x,te), lerp(STACK[2].y,STACK[1].y,te),
+        lerp(ALPHA[2],ALPHA[1],te), ts, false);
+      // old mid → front position
+      drawCard(BUILDS[(buildIdx+1)%n],
+        lerp(STACK[1].x,STACK[0].x,te), lerp(STACK[1].y,STACK[0].y,te),
+        lerp(ALPHA[1],ALPHA[0],te), ts, true);
+      // old front → slides out left
+      drawCard(BUILDS[cur],
+        STACK[0].x - te*(CW+CARD_W), STACK[0].y,
+        1-te, ts, true);
     }
 
-    // Rocky tracks active step on left margin
-    let ry=rockyY, ralpha=1;
-    if(state===S.OUT){ralpha=1-te;}
-    else if(state===S.IN){ralpha=te;}
-    drawRocky(PAD+ROCKY_X,ry,ROCKY_SZ,ts,ralpha);
-
-    // ── PROGRESS BAR ──
-    const prog=state===S.RUN?elapsed/SCENE_MS:state===S.OUT?1:te;
-    ctx.fillStyle=WA(0.06);ctx.fillRect(PAD,CH-10,CW-PAD*2,2);
-    ctx.fillStyle=GA(0.55);ctx.fillRect(PAD,CH-10,(CW-PAD*2)*Math.min(prog,1),2);
+    // progress bar
+    const prog=state===S.RUN?elapsed/SCENE_MS:1;
+    ctx.fillStyle=WA(0.06); ctx.fillRect(PAD,CH-10,CW-PAD*2,2);
+    ctx.fillStyle=GA(0.5);  ctx.fillRect(PAD,CH-10,(CW-PAD*2)*Math.min(prog,1),2);
 
     requestAnimationFrame(draw);
   }
 
-  requestAnimationFrame(ts=>{stateStart=lastTs=ts;rockyY=ySteps+STEP_H/2;rockyTargetY=rockyY;requestAnimationFrame(draw);});
+  requestAnimationFrame(ts=>{stateStart=lastTs=ts;requestAnimationFrame(draw);});
 })();
 
 </script>
